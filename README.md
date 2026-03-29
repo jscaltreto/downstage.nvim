@@ -14,6 +14,18 @@ Requires Neovim 0.11+ and the `downstage` binary on your `PATH`.
 { "jscaltreto/downstage.nvim", ft = "downstage" }
 ```
 
+To limit `nvim-cmp` suggestions for Downstage buffers to LSP results only:
+
+```lua
+{
+  "jscaltreto/downstage.nvim",
+  ft = "downstage",
+  opts = {
+    cmp = true,
+  },
+}
+```
+
 ### Manual
 
 Copy the contents of this repo into your Neovim config directory
@@ -25,7 +37,8 @@ Copy the contents of this repo into your Neovim config directory
 |---|---|
 | `ftdetect/downstage.lua` | Registers `.ds` as the `downstage` filetype |
 | `ftplugin/downstage.lua` | Buffer settings: soft wrap, spell check, comment format |
-| `plugin/downstage.lua` | LSP client configuration (`downstage lsp` over stdio) |
+| `plugin/downstage.lua` | Auto-initializes the plugin with default settings |
+| `lua/downstage/init.lua` | Setup API and optional `nvim-cmp` integration |
 
 ## Installing Downstage
 
@@ -49,6 +62,18 @@ brew install downstage
 - Hover info on character names
 - Go-to-definition (jump to dramatis personae entry)
 - Diagnostics (parse errors, unknown character warnings)
+
+## Configuration
+
+Call `require("downstage").setup()` to configure the plugin explicitly.
+
+If your plugin manager does not infer the main module correctly from the repo
+name, set `main = "downstage"` in your plugin spec.
+
+Options:
+
+- `cmp = true`: if `nvim-cmp` is installed, limit Downstage completion sources
+  to `nvim_lsp` for `downstage` buffers
 
 ## License
 

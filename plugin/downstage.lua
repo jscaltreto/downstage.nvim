@@ -1,6 +1,7 @@
-vim.lsp.config("downstage", {
-	cmd = { "downstage", "lsp" },
-	filetypes = { "downstage" },
-	root_markers = { ".git" },
-})
-vim.lsp.enable("downstage")
+if vim.g.loaded_downstage == 1 then
+  return
+end
+
+vim.g.loaded_downstage = 1
+
+require("downstage").setup()
